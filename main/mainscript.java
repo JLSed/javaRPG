@@ -21,7 +21,7 @@ public class mainscript {
     userInput.close();
     }
 
-    static void StartingScreen() {
+    static void Display_StartingScreen() {
         System.out.println("─────────█▄██▄█─────────\r\n" + //
                 "█▄█▄█▄█▄█▐█┼██▌█▄█▄█▄█▄█\r\n" + //
                 "███┼█████▐████▌█████┼███\r\n" + //
@@ -29,20 +29,29 @@ public class mainscript {
                 "");
         System.out.println("---WELCOME TO JAVARPG---\r\n");
         System.out.println("\r\n-----New Character------");
+    }
+    static void StartingScreen() {
+        Display_StartingScreen();
         userInput = new Scanner(System.in);
         do {
             System.out.print("Name: ");
             playerName = userInput.nextLine();
             if (playerName.length() > 5) {
+                Display_StartingScreen();
                 System.out.println("----------------------");
                 System.out.println("Your Name is too Long.");
                 System.out.println("----------------------");
             }
-        } while (playerName.length() > 5);
+            else if (playerName.length() <= 2) {
+                Display_StartingScreen();
+                System.out.println("----------------------");
+                System.out.println("Your Name is too short.");
+                System.out.println("----------------------");
+            }
+        } while (playerName.length() > 5 || playerName.length() <= 2);
     }
 
-    static void MainGame() {
-        boolean inputViolated = false;
+    static void Display_MainGame() {
         System.out.println("----------------------------------------------------------");
         System.out.println("    ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^\r\n" + //
                 "   /|\\/|\\/|\\ /|\\    /\\-_--\\    /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n" + //
@@ -54,6 +63,11 @@ public class mainscript {
         System.out.println("----------------------------------------------------------");
         System.out.
         println("     \"1: Adventure\"                       \"2: Exit Game\"");
+    }
+
+    static void MainGame() {
+        boolean inputViolated = false;
+        Display_MainGame();
         do {
              try {
                 int input = userInput.nextInt();
@@ -64,10 +78,12 @@ public class mainscript {
                     System.out.println("Exit");
                     inputViolated = false;
                 } else {
+                    Display_MainGame();
                     System.out.println("Invalid Input");           
                     inputViolated = true;
                 }
             } catch (Exception e) {
+            Display_MainGame();
             System.out.println("Invalid Input: " + e);
             userInput = new Scanner(System.in);
             inputViolated = true;
@@ -103,7 +119,6 @@ public class mainscript {
     "Bronze Worm", "Gaswings", "Warphood", "Cryptbeast", "Blight Cat", "Thunder Elemental", "Earth Elemental", "Void Elemental"};
         monster = new monster(monsterName[rng(1, monsterName.length) - 1], 1, 1, 10);
     } 
-
 
     //MISC FUNCTIONS
     static int rng(int min, int max) {
