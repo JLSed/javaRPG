@@ -10,6 +10,7 @@ public class mainscript {
     static int playerCurrentHP = playerMaxHP;
     static int playerHighestDamage = 10;
     static int playerLowestDamage = 0;
+    static int playerSpeed = 11;
     static String playerName;
     static Scanner userInput;
     static monster monster;
@@ -93,7 +94,7 @@ public class mainscript {
 
     static void Adventure() {
         System.out.println("You departed from your base to start your adventure...");
-        
+        isAlive = true;
         do {
             EncounterMonster();
         } while (isAlive == true);
@@ -107,9 +108,38 @@ public class mainscript {
     }
 
     static void BattleMode() {
+        boolean playerTurn = false;
+        boolean enemyTurn = false;
+        if (playerSpeed > monster.speed) {
+            playerTurn = true;
+        } else {
+            enemyTurn = true;
+        }
         do {
-            
-        } while (playerCurrentHP >= 0);
+            if (playerTurn == true) {
+                System.out.println("Your Turn");
+                System.out.println("1: Attack       2: Run");
+                userInput = new Scanner(System.in);
+                int input = userInput.nextInt();
+                try {
+                    if (input == 1) {
+                        int damageDealt = rng(playerLowestDamage, playerHighestDamage);
+                        monster.health -= damageDealt;
+                        System.out.println("you dealt " + damageDealt + " Damage!");
+                        
+                    } else if (input == 2) {
+                        System.out.println("You Ran.");
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid Input: " + e);
+                }
+            }
+            else {
+                System.out.println("Enemy's Turn");
+            }
+        } while (playerCurrentHP > 0);
     }
 
     //GAME FUNCTIONS
@@ -117,13 +147,12 @@ public class mainscript {
         String[] monsterName = {"Phantom Scourge", "Haunt", "Phantom of Purgatory", "Water Elemental", "Ghost Seeker",
     "Forest Brute", "Dark Fury", "Night Hunter", "Blood Savage", "Hair Demon", "The Cold Mutt", "Abyss Talon", "Emberling",
     "Bronze Worm", "Gaswings", "Warphood", "Cryptbeast", "Blight Cat", "Thunder Elemental", "Earth Elemental", "Void Elemental"};
-        monster = new monster(monsterName[rng(1, monsterName.length) - 1], 1, 1, 10);
+        monster = new monster(monsterName[rng(1, monsterName.length) - 1], 1, 100, 1, 10, rng(1,10));
     } 
 
     //MISC FUNCTIONS
     static int rng(int min, int max) {
         Random rand = new Random();
-        max +=1;
-        return rand.nextInt(max - min) + min;
+        return rand.nextInt((max +=1) - min) + min;
     }
 }
