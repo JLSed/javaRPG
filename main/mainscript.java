@@ -89,7 +89,7 @@ public class mainscript {
             userInput = new Scanner(System.in);
             inputViolated = true;
             }
-        } while (inputViolated == true);
+        } while (inputViolated);
     }
 
     static void Adventure() {
@@ -120,8 +120,10 @@ public class mainscript {
                 System.out.println("Your Turn");
                 System.out.println("1: Attack       2: Run");
                 userInput = new Scanner(System.in);
-                int input = userInput.nextInt();
-                try {
+                boolean inputViolated = false;
+                do {
+                    try {
+                    int input = userInput.nextInt();
                     if (input == 1) {
                         int damageDealt = rng(playerLowestDamage, playerHighestDamage);
                         monster.health -= damageDealt;
@@ -131,10 +133,14 @@ public class mainscript {
                         System.out.println("You Ran.");
                     } else {
                         System.out.println("Invalid Input");
+                        inputViolated = true;
                     }
-                } catch (Exception e) {
-                    System.out.println("Invalid Input: " + e);
-                }
+                    } catch (Exception e) {
+                        System.out.println("Invalid Input: " + e);
+                        userInput = new Scanner(System.in);
+                        inputViolated = true;
+                    }
+                } while (inputViolated);
             }
             else {
                 System.out.println("Enemy's Turn");
