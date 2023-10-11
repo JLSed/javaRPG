@@ -109,11 +109,8 @@ public class mainscript {
 
     static void BattleMode() {
         boolean playerTurn = false;
-        boolean enemyTurn = false;
         if (playerSpeed > monster.speed) {
             playerTurn = true;
-        } else {
-            enemyTurn = true;
         }
         do {
             if (playerTurn == true) {
@@ -128,6 +125,7 @@ public class mainscript {
                         int damageDealt = rng(playerLowestDamage, playerHighestDamage);
                         monster.health -= damageDealt;
                         System.out.println("you dealt " + damageDealt + " Damage!");
+                        playerTurn = false;
                         
                     } else if (input == 2) {
                         System.out.println("You Ran.");
@@ -143,7 +141,12 @@ public class mainscript {
                 } while (inputViolated);
             }
             else {
+                System.out.println("----------------------------------------------------------");
                 System.out.println("Enemy's Turn");
+                int damageDealt = rng(monster.lowestDamage, monster.highestDamage);
+                playerCurrentHP -= damageDealt;
+                System.out.println("You took "+ damageDealt+ " Damage!");
+                playerTurn = true;
             }
         } while (playerCurrentHP > 0);
     }
