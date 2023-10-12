@@ -4,23 +4,15 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class mainscript {
-
-    static int playerLevel = 1;
-    static int playerExp = 0;
-    static int playerMaxHP = 100;
-    static int playerCurrentHP = playerMaxHP;
-    static int playerHighestDamage = 10;
-    static int playerLowestDamage = 0;
-    static int playerSpeed = 11;
-    static String playerName;
     static Scanner userInput;
+    static player player;
     static monster monster;
     static boolean OnAdventure;
     public static void main(String[] args) {
 
         StartingScreen();
         MainGame();
-    userInput.close();
+        userInput.close();
     }
 
     static void Display_StartingScreen() {
@@ -37,20 +29,20 @@ public class mainscript {
         userInput = new Scanner(System.in);
         do {
             System.out.print("Name: ");
-            playerName = userInput.nextLine();
-            if (playerName.length() > 5) {
+            player = new player(userInput.nextLine(), 1, 100, 1, 10, 100, 0);
+            if (player.name.length() > 5) {
                 Display_StartingScreen();
                 System.out.println("----------------------");
                 System.out.println("Your Name is too Long.");
                 System.out.println("----------------------");
             }
-            else if (playerName.length() <= 2) {
+            else if (player.name.length() <= 2) {
                 Display_StartingScreen();
                 System.out.println("----------------------");
                 System.out.println("Your Name is too short.");
                 System.out.println("----------------------");
             }
-        } while (playerName.length() > 5 || playerName.length() <= 2);
+        } while (player.name.length() > 5 || player.name.length() <= 2);
     }
 
     static void Display_MainGame() {
@@ -60,8 +52,8 @@ public class mainscript {
                 "   /|\\/|\\/|\\ /|\\   /  \\_-__\\   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n" + //
                 "   /|\\/|\\/|\\ /|\\   |[]| [] |   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\");
         System.out.println("----------------------------------------------------------");
-        System.out.println("     Name: " + playerName + "                         Level: " + playerLevel);
-        System.out.println("     Health: " + playerMaxHP + "                       Exp: " + playerExp);
+        System.out.println("     Name: " + player.name + "                         Level: " + player.level);
+        System.out.println("     Health: " + player.maxHP + "                       Exp: " + player.exp);
         System.out.println("----------------------------------------------------------");
         System.out.
         println("     \"1: Adventure\"                       \"2: Exit Game\"");
@@ -109,14 +101,14 @@ public class mainscript {
     }
 
     static void Display_BattleModeYourTurn() {
-        System.out.println("Your Health: " + playerCurrentHP + "|----|"+ monster.name+ "'s Health: "+monster.health);
+        System.out.println("Your Health: " + player.currentHP + "|----|"+ monster.name+ "'s Health: "+monster.currentHP);
         System.out.println("Your Turn:");
         System.out.println("1: Attack       2: Run");
     }
 
     static void BattleMode() {
         boolean playerTurn = false;
-        if (playerSpeed > monster.speed) {
+        if (player.speed > monster.speed) {
             playerTurn = true;
         }
         do {
@@ -129,8 +121,8 @@ public class mainscript {
                     Display_BattleModeYourTurn();
                     int input = userInput.nextInt();
                     if (input == 1) {
-                        int damageDealt = rng(playerLowestDamage, playerHighestDamage);
-                        monster.health -= damageDealt;
+                        int damageDealt = rng(player.lowestDamage, player.highestDamage);
+                        monster.currentHP -= damageDealt;
                         System.out.println("You dealt " + damageDealt + " Damage!");
                         // delay outputs for visual
                         try {
@@ -161,7 +153,7 @@ public class mainscript {
                 System.out.println("\n");
                 System.out.println("Enemy's Turn:");
                 int damageDealt = rng(monster.lowestDamage, monster.highestDamage);
-                playerCurrentHP -= damageDealt;
+                player.currentHP -= damageDealt;
                 System.out.println("You took "+ damageDealt+ " Damage!\n");
                 // delay outputs for visual
                 try {
@@ -171,7 +163,7 @@ public class mainscript {
                 }
                 playerTurn = true;
             }
-        } while (playerCurrentHP > 0);
+        } while (player.currentHP > 0);
     }
 
     //GAME FUNCTIONS
