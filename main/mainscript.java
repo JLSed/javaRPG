@@ -1,6 +1,7 @@
 package main;
 import java.util.Scanner;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class mainscript {
 
@@ -14,7 +15,7 @@ public class mainscript {
     static String playerName;
     static Scanner userInput;
     static monster monster;
-    static boolean isAlive;
+    static boolean OnAdventure;
     public static void main(String[] args) {
 
         StartingScreen();
@@ -94,17 +95,23 @@ public class mainscript {
 
     static void Adventure() {
         System.out.println("You departed from your base to start your adventure...");
-        isAlive = true;
+        OnAdventure = true;
         do {
             EncounterMonster();
-        } while (isAlive == true);
+        } while (OnAdventure == true);
     }
 
     //three main situation: ENCOUNTER, DISCOVERY, EXPLORE 
     static void EncounterMonster() {
         GenerateMonster();
-        System.out.println("You Encounter A " + monster.name + "!");
+        System.out.println("\n\n\nYou Encounter A " + monster.name + "!\n");
         BattleMode();
+    }
+
+    static void Display_BattleModeYourTurn() {
+        System.out.println("Your Health: " + playerCurrentHP + "|----|"+ monster.name+ "'s Health: "+monster.health);
+        System.out.println("Your Turn:");
+        System.out.println("1: Attack       2: Run");
     }
 
     static void BattleMode() {
@@ -114,38 +121,54 @@ public class mainscript {
         }
         do {
             if (playerTurn == true) {
-                System.out.println("Your Turn");
-                System.out.println("1: Attack       2: Run");
+                
                 userInput = new Scanner(System.in);
                 boolean inputViolated = false;
                 do {
                     try {
+                    Display_BattleModeYourTurn();
                     int input = userInput.nextInt();
                     if (input == 1) {
                         int damageDealt = rng(playerLowestDamage, playerHighestDamage);
                         monster.health -= damageDealt;
-                        System.out.println("you dealt " + damageDealt + " Damage!");
+                        System.out.println("You dealt " + damageDealt + " Damage!");
+                        // delay outputs for visual
+                        try {
+                            TimeUnit.MILLISECONDS.sleep(200);
+                        } catch (Exception e) {
+                            continue;
+                        }
                         playerTurn = false;
-                        
+                        inputViolated = false;
                     } else if (input == 2) {
                         System.out.println("You Ran.");
                     } else {
+                        Display_BattleModeYourTurn();
                         System.out.println("Invalid Input");
+                        System.out.println("\n\n\n\n");
                         inputViolated = true;
                     }
                     } catch (Exception e) {
+                        Display_BattleModeYourTurn();
                         System.out.println("Invalid Input: " + e);
+                        System.out.println("\n\n\n\n");
                         userInput = new Scanner(System.in);
                         inputViolated = true;
                     }
                 } while (inputViolated);
             }
             else {
-                System.out.println("----------------------------------------------------------");
-                System.out.println("Enemy's Turn");
+                System.out.println("\n");
+                System.out.println("Enemy's Turn:");
                 int damageDealt = rng(monster.lowestDamage, monster.highestDamage);
                 playerCurrentHP -= damageDealt;
-                System.out.println("You took "+ damageDealt+ " Damage!");
+                System.out.println("You took "+ damageDealt+ " Damage!\n");
+                // delay outputs for visual
+                try {
+                    TimeUnit.MILLISECONDS.sleep(400);
+                } catch (Exception e) {
+                    continue;
+                }
                 playerTurn = true;
             }
         } while (playerCurrentHP > 0);
