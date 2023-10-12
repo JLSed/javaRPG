@@ -101,7 +101,7 @@ public class mainscript {
     }
 
     static void Display_BattleModeYourTurn() {
-        System.out.println("Your Health: " + player.currentHP + "|----|"+ monster.name+ "'s Health: "+monster.currentHP);
+        System.out.println(player.name+": " + player.currentHP +"|----|"+monster.currentHP+" :" + monster.name);
         System.out.println("Your Turn:");
         System.out.println("1: Attack       2: Run");
     }
