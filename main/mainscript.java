@@ -108,6 +108,7 @@ public class mainscript {
 
     static void BattleMode() {
         boolean playerTurn = false;
+        boolean playerDead = false;
         if (player.speed > monster.speed) {
             playerTurn = true;
         }
@@ -124,8 +125,8 @@ public class mainscript {
                         int damageDealt = rng(player.lowestDamage, player.highestDamage);
                         monster.currentHP -= damageDealt;
                         System.out.println("You dealt " + damageDealt + " Damage!");
-                        // delay outputs for visual
                         try {
+                        // delay outputs for visual
                             TimeUnit.MILLISECONDS.sleep(200);
                         } catch (Exception e) {
                             continue;
@@ -136,34 +137,38 @@ public class mainscript {
                         System.out.println("You Ran.");
                     } else {
                         Display_BattleModeYourTurn();
-                        System.out.println("Invalid Input");
-                        System.out.println("\n\n\n\n");
+                        System.out.println("Invalid Input\n\n\n\n");
                         inputViolated = true;
                     }
                     } catch (Exception e) {
                         Display_BattleModeYourTurn();
-                        System.out.println("Invalid Input: " + e);
-                        System.out.println("\n\n\n\n");
+                        System.out.println("Invalid Input: " + e + "\n\n\n\n");
                         userInput = new Scanner(System.in);
                         inputViolated = true;
                     }
                 } while (inputViolated);
-            }
-            else {
+            } else {
                 System.out.println("\n");
                 System.out.println("Enemy's Turn:");
                 int damageDealt = rng(monster.lowestDamage, monster.highestDamage);
                 player.currentHP -= damageDealt;
                 System.out.println("You took "+ damageDealt+ " Damage!\n");
-                // delay outputs for visual
                 try {
+                // delay outputs for visual
                     TimeUnit.MILLISECONDS.sleep(400);
                 } catch (Exception e) {
                     continue;
                 }
-                playerTurn = true;
+                if (player.currentHP < 0) {
+                    playerDead = true;
+                } else {
+                    playerTurn = true;
+                }
             }
-        } while (player.currentHP > 0);
+            
+        } while (playerDead == false);
+
+        System.out.println("DEAD!");
     }
 
     //GAME FUNCTIONS
