@@ -122,7 +122,7 @@ public class mainscript {
                     Display_BattleModeYourTurn();
                     int input = userInput.nextInt();
                     if (input == 1) {
-                        int damageDealt = rng(player.lowestDamage, player.highestDamage);
+                        int damageDealt =miscFunction.rng(player.lowestDamage, player.highestDamage);
                         monster.currentHP -= damageDealt;
                         System.out.println("You dealt " + damageDealt + " Damage!");
                         try {
@@ -150,7 +150,7 @@ public class mainscript {
             } else {
                 System.out.println("\n");
                 System.out.println("Enemy's Turn:");
-                int damageDealt = rng(monster.lowestDamage, monster.highestDamage);
+                int damageDealt =miscFunction.rng(monster.lowestDamage, monster.highestDamage);
                 player.currentHP -= damageDealt;
                 System.out.println("You took "+ damageDealt+ " Damage!\n");
                 try {
@@ -176,12 +176,5 @@ public class mainscript {
         String[] monsterName = {"Phantom Scourge", "Haunt", "Phantom of Purgatory", "Water Elemental", "Ghost Seeker",
     "Forest Brute", "Dark Fury", "Night Hunter", "Blood Savage", "Hair Demon", "The Cold Mutt", "Abyss Talon", "Emberling",
     "Bronze Worm", "Gaswings", "Warphood", "Cryptbeast", "Blight Cat", "Thunder Elemental", "Earth Elemental", "Void Elemental"};
-        monster = new monster(monsterName[rng(1, monsterName.length) - 1], 1, 100, 1, 10, rng(1,10));
+        monster = new monster(monsterName[miscFunction.rng(1, monsterName.length) - 1], 1, 100, 1, 10,miscFunction.rng(1,10));
     } 
-
-    //MISC FUNCTIONS
-    static int rng(int min, int max) {
-        Random rand = new Random();
-        return rand.nextInt((max +=1) - min) + min;
-    }
-}

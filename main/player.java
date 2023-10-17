@@ -21,5 +21,8 @@ public class player {
         exp = playerExp;
     }
 
+    public int attack(int MonHP) {
+        return MonHP = miscFunction.rng(this.lowestDamage, this.highestDamage);
+    }
 
 }
