@@ -2,11 +2,10 @@ package main;
 
 public class player {
     int level;
-    int exp;
+    int exp, currentExp;
     int maxHP;
     int currentHP = maxHP;
-    int highestDamage;
-    int lowestDamage;
+    int highestDamage, lowestDamage;
     int speed;
     String name;
     
@@ -18,11 +17,12 @@ public class player {
         lowestDamage = playerLowDMG;
         highestDamage = playerHighDMG;
         speed = playerSpeed;
-        exp = playerExp;
+        exp = (int) (50 + (level) * 2.5);
+
     }
 
     public int attack(int MonHP) {
-        return MonHP = miscFunction.rng(this.lowestDamage, this.highestDamage);
+        return MonHP = GameFunction.rng(this.lowestDamage, this.highestDamage);
     }
 
 }
