@@ -100,6 +100,7 @@ public class mainscript {
                             GameFunction.PlayerAttack();
                             GameFunction.VisualDelay(400);
                             if (GameFunction.EnemyDead() == true) {
+                                // GameFunction.EnemyDead() is also where the exp earn function is.
                                 BattleOver = true;
                                 continue;
                             }

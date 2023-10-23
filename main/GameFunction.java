@@ -1,3 +1,7 @@
+// This is the function dumpster of the game.
+// I made this for a better readability and to reduce complicated looks on the mainscript.
+// Functions That start with Display_ indicates it is a function that display a visual of some sort.
+
 package main;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -64,6 +68,7 @@ public class GameFunction {
     }
 
     //VISUAL
+    
     static void Display_StartingScreen() {
         System.out.println("─────────█▄██▄█─────────\r\n" + //
                 "█▄█▄█▄█▄█▐█┼██▌█▄█▄█▄█▄█\r\n" + //
