@@ -1,5 +1,6 @@
 package main;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class GameFunction {
 
@@ -17,18 +18,49 @@ public class GameFunction {
         mainscript.monster =  new monster(monsterName[GameFunction.rng(1, monsterName.length) - 1], 3, 100, 1, 10,GameFunction.rng(1,10));
     }
 
-    public static void playerAttack() {
+    public static void PlayerAttack() {
         int damageDealt =GameFunction.rng(mainscript.player.lowestDamage, mainscript.player.highestDamage);
         mainscript.monster.currentHP -= damageDealt;
         System.out.println("You dealt " + damageDealt + " Damage!");
     }
 
-    public static void enemyAttack() {
+    public static void EnemyAttack() {
         System.out.println("\n");
         System.out.println("Enemy's Turn:");
         int damageDealt =GameFunction.rng(mainscript.monster.lowestDamage, mainscript.monster.highestDamage);
         mainscript.player.currentHP -= damageDealt;
         System.out.println("You took "+ damageDealt+ " Damage!\n");
+    }
+
+    public static boolean EnemyDead() {
+        if (mainscript.monster.currentHP < 0) {
+            boolean enemyDead = true;
+            double expEarned = ((GameFunction.rng(10, 15) * mainscript.player.level) / 3.3);
+            System.out.println("you earned " + expEarned + "!");
+            mainscript.player.currentExp += (int)expEarned;
+            if (mainscript.player.currentExp >= mainscript.player.exp) {
+                System.out.println("You leveled up! current lvl: " + mainscript.player.level);
+                mainscript.player.level++;
+                mainscript.player.exp += (int) (50 + (mainscript.player.level) * 2.5);
+            }
+            return enemyDead;
+        }
+        // If the condition doesnt meet. return false
+        return false;
+    }
+    
+    public static void PlayerDeadChecker() {
+        if (mainscript.player.currentHP < 0) {
+            System.out.println("YOU DIED");
+        }
+    }
+
+    public static void VisualDelay(int ms) {
+        try {
+            TimeUnit.MILLISECONDS.sleep(ms);
+        } catch (Exception e) {
+            // do nothing
+        }
     }
 
     //VISUAL
@@ -49,8 +81,8 @@ public class GameFunction {
                 "   /|\\/|\\/|\\ /|\\   /  \\_-__\\   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n" + //
                 "   /|\\/|\\/|\\ /|\\   |[]| [] |   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\");
         System.out.println("----------------------------------------------------------");
-        System.out.println("     Name: " + mainscript.player.name + "                         Level: " + mainscript.player.level);
-        System.out.println("     Health: " + mainscript.player.maxHP + "                       Exp: " + mainscript.player.exp);
+        System.out.println("     Name: " + mainscript.player.name + "   Level: " + mainscript.player.level);
+        System.out.println("     Health: " + mainscript.player.maxHP + "    Exp: " + mainscript.player.currentExp + "/" + mainscript.player.exp);
         System.out.println("----------------------------------------------------------");
         System.out.
         println("     \"1: Adventure\"                       \"2: Exit Game\"");
@@ -62,6 +94,9 @@ public class GameFunction {
         System.out.println("Your Turn:");
         System.out.println("1: Attack       2: Run");
     }
+
+    
+    
 
     
 

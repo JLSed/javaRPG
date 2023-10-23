@@ -1,12 +1,13 @@
 package main;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+
 
 public class mainscript {
     static Scanner userInput;
     static player player;
     static monster monster;
     static boolean OnAdventure;
+    static boolean BattleOver;
 
     public static void main(String[] args) {
         StartingScreen();
@@ -73,15 +74,20 @@ public class mainscript {
     static void EncounterMonster() {
         GameFunction.GenerateMonster();
         System.out.println("\n\n\nYou Encounter A " + monster.name + "!\n");
-        BattleMode();
+        do {
+            BattleMode();
+        } while (BattleOver == false);
+        System.out.println("BATTLE IS OVER!!!");
     }
 
     static void BattleMode() {
-        boolean playerTurn = false, playerDead = false;
+        BattleOver = false;
+        boolean playerTurn = false;
         if (player.speed > monster.speed) {
             playerTurn = true;
         }
         do {
+            //Player turn:
             if (playerTurn == true) {
                 userInput = new Scanner(System.in);
                 boolean inputViolated = false;
@@ -89,26 +95,15 @@ public class mainscript {
                     try {
                     GameFunction.Display_BattleModeYourTurn();
                     int input = userInput.nextInt();
-                    //player attacks: function is inside GameFunction.playerAttack()
+                    //player attacks: function is inside GameFunction.PlayerAttack()
                         if (input == 1) {
-                            GameFunction.playerAttack();
-                                try {
-                                // delay outputs for visual
-                                    TimeUnit.MILLISECONDS.sleep(200);
-                                } catch (Exception e) {
-                                    continue;
-                                }
-                                if (monster.currentHP < 0) {
-                                    double expEarned = ((GameFunction.rng(10, 15) * player.level) / 3.3);
-                                    System.out.println("you earned " + expEarned + "!");
-                                    player.currentExp += (int)expEarned;
-                                    if (player.currentExp >= player.exp) {
-                                        System.out.println("You leveled up! current lvl: " + player.level);
-                                        player.level++;
-                                        player.exp += (int) (50 + (player.level) * 2.5);
-                                    }
-                                }
-                                playerTurn = false; inputViolated = false;
+                            GameFunction.PlayerAttack();
+                            GameFunction.VisualDelay(400);
+                            if (GameFunction.EnemyDead() == true) {
+                                BattleOver = true;
+                                continue;
+                            }
+                            playerTurn = false; inputViolated = false;
                         } else if (input == 2) {
                             System.out.println("You Ran.");
                         } else {
@@ -123,26 +118,14 @@ public class mainscript {
                         inputViolated = true;
                     }
                 } while (inputViolated);
+                // Enemy turn:
             } else {
-               GameFunction.enemyAttack();
-                try {
-                // delay outputs for visual
-                    TimeUnit.MILLISECONDS.sleep(400);
-                } catch (Exception e) {
-                    continue;
-                }
-                if (player.currentHP < 0) {
-                    playerDead = true;
-                } else {
-                    playerTurn = true;
-                }
+                GameFunction.EnemyAttack();
+                GameFunction.VisualDelay(400);
+                GameFunction.PlayerDeadChecker();
             }
-        } while (playerDead == false);
-        if (playerDead) {
-            System.out.println("DEAD!");
-        }
+        } while (BattleOver == false);
     }
-
 
 
 
