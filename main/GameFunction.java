@@ -22,8 +22,8 @@ public class GameFunction {
         mainscript.monster =  new monster(monsterName[GameFunction.rng(1, monsterName.length) - 1], 3, 100, 1, 10,GameFunction.rng(1,10));
     }
 
-    public static void PlayerAttack() {
-        int damageDealt =GameFunction.rng(mainscript.player.lowestDamage, mainscript.player.highestDamage);
+    public static void PlayerAttack(player player) {
+        int damageDealt = player.Attack();
         mainscript.monster.currentHP -= damageDealt;
         System.out.println("You dealt " + damageDealt + " Damage!");
     }
@@ -39,19 +39,21 @@ public class GameFunction {
     public static boolean EnemyDead() {
         if (mainscript.monster.currentHP < 0) {
             boolean enemyDead = true;
-            double expEarned = ((GameFunction.rng(10, 15) * mainscript.player.level) / 3.3);
+            int expEarned = mainscript.player.ExpEarned();
             System.out.println("you earned " + expEarned + "!");
-            mainscript.player.currentExp += (int)expEarned;
+            mainscript.player.currentExp += expEarned;
             if (mainscript.player.currentExp >= mainscript.player.exp) {
                 System.out.println("You leveled up! current lvl: " + mainscript.player.level);
                 mainscript.player.level++;
-                mainscript.player.exp += (int) (50 + (mainscript.player.level) * 2.5);
+                mainscript.player.exp += mainscript.player.ExpEarned();
             }
             return enemyDead;
         }
         // If the condition doesnt meet. return false
         return false;
     }
+
+
     
     public static void PlayerDeadChecker() {
         if (mainscript.player.currentHP < 0) {

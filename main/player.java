@@ -17,12 +17,24 @@ public class player {
         lowestDamage = playerLowDMG;
         highestDamage = playerHighDMG;
         speed = playerSpeed;
-        exp = (int) (50 + (level) * 2.5);
+        exp = BaseExpUpdate();
 
     }
 
-    public int attack(int MonHP) {
-        return MonHP = GameFunction.rng(this.lowestDamage, this.highestDamage);
+    public int Attack() {
+        int atkdealt = GameFunction.rng(this.lowestDamage, this.highestDamage);
+        return atkdealt;
     }
 
+    public int BaseExpUpdate() {
+        // FORMULA: (50 + (level * 2.5))
+        int exp = (int)(50 + (this.level) * 2.5);
+        return exp;
+    }
+
+    public int ExpEarned() {
+        // FORMULA: expEarned = ((rngNum) * level) / 3.3
+        double expEarned = ((GameFunction.rng(25, 30) * mainscript.player.level) / 3.3);
+        return (int) Math.round(expEarned);
+    }
 }

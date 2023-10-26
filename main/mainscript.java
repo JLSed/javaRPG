@@ -97,7 +97,7 @@ public class mainscript {
                     int input = userInput.nextInt();
                     //player attacks: function is inside GameFunction.PlayerAttack()
                         if (input == 1) {
-                            GameFunction.PlayerAttack();
+                            GameFunction.PlayerAttack(player);
                             GameFunction.VisualDelay(400);
                             if (GameFunction.EnemyDead() == true) {
                                 // GameFunction.EnemyDead() is also where the exp earn function is.
@@ -124,6 +124,7 @@ public class mainscript {
                 GameFunction.EnemyAttack();
                 GameFunction.VisualDelay(400);
                 GameFunction.PlayerDeadChecker();
+                playerTurn = true;
             }
         } while (BattleOver == false);
     }
