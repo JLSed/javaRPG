@@ -6,19 +6,24 @@ public class player {
     int maxHP;
     int currentHP = maxHP;
     int highestDamage, lowestDamage;
-    int speed;
+    int spd;
+    int str;
+    int mag;
     String name;
+    String race;
     
-    public player(String playerName, int playerLevel, int playerHealth, int playerLowDMG, int playerHighDMG, int playerSpeed, int playerExp) {
+    public player(String playerName, int playerLevel, int playerHealth, int playerLowDMG, int playerHighDMG, int playerStr, int playerMag, int playerSpeed, int playerExp, String playerRace) {
         name = playerName;
         level = playerLevel;
         maxHP = playerHealth;
         currentHP = maxHP;
         lowestDamage = playerLowDMG;
         highestDamage = playerHighDMG;
-        speed = playerSpeed;
+        str = playerStr;
+        mag = playerMag;
+        spd = playerSpeed;
+        race = playerRace;
         exp = BaseExpUpdate();
-
     }
 
     public int Attack() {

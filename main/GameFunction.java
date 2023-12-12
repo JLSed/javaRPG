@@ -90,6 +90,7 @@ public class GameFunction {
         System.out.println("----------------------------------------------------------");
         System.out.println("     Name: " + mainscript.player.name + "   Level: " + mainscript.player.level);
         System.out.println("     Health: " + mainscript.player.maxHP + "    Exp: " + mainscript.player.currentExp + "/" + mainscript.player.exp);
+        System.out.println(mainscript.player.race);
         System.out.println("----------------------------------------------------------");
         System.out.
         println("     \"1: Adventure\"                       \"2: Exit Game\"");

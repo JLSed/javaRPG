@@ -18,22 +18,57 @@ public class mainscript {
     static void StartingScreen() {
         GameFunction.Display_StartingScreen();
         userInput = new Scanner(System.in);
+        String playerName = "";
+        int playerRace = 1;
         do {
             System.out.print("Name: ");
-            player = new player(userInput.nextLine(), 1, 1000, 10, 50, 100, 0);
-            if (player.name.length() > 5) {
+            playerName = userInput.nextLine();
+            if (playerName.length() > 5) {
                 GameFunction.Display_StartingScreen();
                 System.out.println("----------------------");
                 System.out.println("Your Name is too Long.");
                 System.out.println("----------------------");
             }
-            else if (player.name.length() <= 2) {
+            else if (playerName.length() <= 2) {
                 GameFunction.Display_StartingScreen();
                 System.out.println("----------------------");
                 System.out.println("Your Name is too short.");
                 System.out.println("----------------------");
             }
-        } while (player.name.length() > 5 || player.name.length() <= 2);
+        } while (playerName.length() > 5 || playerName.length() <= 2);
+        boolean inputViolated = false;
+        do {
+            System.out.println("Choose your race: \n [1]Human [2]Demon [3]Elf [4]Beast");
+            try {
+                playerRace = userInput.nextInt();
+                inputViolated = false;
+                if (playerRace < 1 || playerRace > 4) {
+                    System.out.println("Invalid");
+                    inputViolated = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid");
+                userInput = new Scanner(System.in);
+                inputViolated = true;
+            }
+        } while (inputViolated);
+        switch (playerRace) {
+            case 1:
+                player = new player(playerName,1,100,1,10,3,0,10,0,"Human");
+                break;
+            case 2:
+                player = new player(playerName,1,100,1,10,4,5,10,0,"Demon");
+                break;
+            case 3:
+                player = new player(playerName,1,100,1,10,2,7,10,0,"Elf");
+                break;
+            case 4:
+                player = new player(playerName,1,100,1,10,7,2,10,0,"Beast");
+                break;
+            default:
+                System.out.println("Error occured. Please Restart the game.");
+                break;
+        }
     }
 
     static void MainGame() {
@@ -42,16 +77,20 @@ public class mainscript {
         do {
              try {
                 int input = userInput.nextInt();
-                if (input == 1) {
-                    inputViolated = false;
-                    Adventure();
-                } else if (input == 2) {
-                    System.out.println("Exit");
-                    inputViolated = false;
-                } else {
-                    GameFunction.Display_MainGame();
-                    System.out.println("Invalid Input");           
-                    inputViolated = true;
+                switch (input) {
+                    case 1:
+                        inputViolated = false;
+                        Adventure();    
+                        break;
+                    case 2: 
+                        System.out.println("Exit");
+                        inputViolated = false; 
+                        break;
+                    default:
+                        GameFunction.Display_MainGame();
+                        System.out.println("Invalid Input");           
+                        inputViolated = true;
+                        break;
                 }
             } catch (Exception e) {
             GameFunction.Display_MainGame();
@@ -83,7 +122,7 @@ public class mainscript {
     static void BattleMode() {
         BattleOver = false;
         boolean playerTurn = false;
-        if (player.speed > monster.speed) {
+        if (player.spd > monster.speed) {
             playerTurn = true;
         }
         do {
@@ -95,8 +134,8 @@ public class mainscript {
                     try {
                     GameFunction.Display_BattleModeYourTurn();
                     int input = userInput.nextInt();
-                    //player attacks: function is inside GameFunction.PlayerAttack()
-                        if (input == 1) {
+                    switch (input) {
+                        case 1:
                             GameFunction.PlayerAttack(player);
                             GameFunction.VisualDelay(400);
                             if (GameFunction.EnemyDead() == true) {
@@ -104,14 +143,19 @@ public class mainscript {
                                 BattleOver = true;
                                 continue;
                             }
-                            playerTurn = false; inputViolated = false;
-                        } else if (input == 2) {
+                            playerTurn = false; inputViolated = false;                                
+                            break;
+                        case 2:
                             System.out.println("You Ran.");
-                        } else {
+                            break;
+                    
+                        default:
                             GameFunction.Display_BattleModeYourTurn();
                             System.out.println("Invalid Input\n\n\n\n");
                             inputViolated = true;
+                            break;
                         }
+                    //player attacks: function is inside GameFunction.PlayerAttack()
                     } catch (Exception e) {
                         GameFunction.Display_BattleModeYourTurn();
                         System.out.println("Invalid Input: " + e + "\n\n\n\n");

@@ -1,0 +1,35 @@
+mode of damaging:
+    physical Attack
+    magic Attack
+
+no profession you damage based on what you equip*
+earn skills after using a specific mode of damaging constantly*
+    physical attack: slash,
+    magic attack: fire ball (skills for magic attack can also be unlock if using a weapon that has a skill) 
+
+stats:
+    HP
+    STR
+    MAG
+    STA
+    SPD
+
+weapon stats:
+    physical attack
+    magical attack
+    crit%
+    crit dmg
+    skills
+
+races:
+    elf - mag+++
+    human - phy++
+    demon - mag+++/phy++
+    beast - phy++++
+
+guild system(commission, hunt, bounty hunt), towns, cities, ruins, dungeon
+
+
+
+final goal: ai-progression story based
+
