@@ -4,6 +4,7 @@
 
 package main;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class GameFunction {
@@ -13,6 +14,21 @@ public class GameFunction {
     public static int rng(int min, int max) {
         Random rand = new Random();
         return rand.nextInt((max +=1) - min) + min;
+    }
+
+    public static int UserInput(int min, int max, Scanner userinput) {
+        try {
+            int inputHolder = userinput.nextInt();
+            if (inputHolder >= min && inputHolder <= max) {
+                return inputHolder;
+            } else {
+                return UserInput(min, max, userinput);
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid");
+            userinput = new Scanner(System.in);
+            return UserInput(min, max, userinput);
+        }
     }
 
     public static void GenerateMonster() {
@@ -33,11 +49,11 @@ public class GameFunction {
     }
 
     public static void EnemyAttack(monster monster) {
-        System.out.println("\n");
+        // System.out.println("\n");
         System.out.println("Enemy's Turn:");
         int damageDealt = monster.Attack(mainscript.player.def); 
         mainscript.player.currentHP -= damageDealt;
-        System.out.println("You took "+ damageDealt+ " Damage!\n");
+        System.out.println("You took "+ damageDealt+ " Damage!");
     }
 
     public static boolean EnemyDead() {
@@ -75,37 +91,7 @@ public class GameFunction {
 
     //VISUAL
     
-    static void Display_StartingScreen() {
-        System.out.println("─────────█▄██▄█─────────\r\n" + //
-                "█▄█▄█▄█▄█▐█┼██▌█▄█▄█▄█▄█\r\n" + //
-                "███┼█████▐████▌█████┼███\r\n" + //
-                "█████████▐████▌█████████\r\n" + //
-                "");
-        System.out.println("---WELCOME TO JAVARPG---\r\n");
-        System.out.println("\r\n-----New Character------");
-    }
-
-    static void Display_MainGame() {
-        System.out.println("----------------------------------------------------------");
-        System.out.println("    ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^\r\n" + //
-                "   /|\\/|\\/|\\ /|\\    /\\-_--\\    /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n" + //
-                "   /|\\/|\\/|\\ /|\\   /  \\_-__\\   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n" + //
-                "   /|\\/|\\/|\\ /|\\   |[]| [] |   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\");
-        System.out.println("----------------------------------------------------------");
-        System.out.println("     Name: " + mainscript.player.name + "   Level: " + mainscript.player.level);
-        System.out.println("     Health: " + mainscript.player.maxHP + "    Exp: " + mainscript.player.currentExp + "/" + mainscript.player.exp);
-        System.out.println(mainscript.player.race);
-        System.out.println("----------------------------------------------------------");
-        System.out.
-        println("     \"1: Adventure\"                       \"2: Exit Game\"");
-    }
-
-    public static void Display_BattleModeYourTurn() {
-        System.out.println("Current Exp: " + mainscript.player.currentExp  + "/" + mainscript.player.exp);
-        System.out.println(mainscript.player.name+": " + mainscript.player.currentHP +"|----|"+ mainscript.monster.currentHP+" :" + mainscript.monster.name);
-        System.out.println("Your Turn:");
-        System.out.println("1: Attack       2: Run");
-    }
+    
 
     
     

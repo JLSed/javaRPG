@@ -36,7 +36,7 @@ public class player {
     }
 
     public int Attack(int monsterDef) {
-        double final_multiplier = 1 + (Math.random() * (1.125 - 1));
+        double final_multiplier = 1 + (Math.random() * (3.125 - 1));
         double dmg = ((modeOfDmg * basedmg_multiplier) - (((monsterDef * 0.5) / 1.01) * def_penetration ) ) * final_multiplier;
         // System.out.println(dmg + " " + final_multiplier);
         return (int) Math.round(dmg);

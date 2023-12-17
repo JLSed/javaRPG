@@ -16,7 +16,7 @@ public class mainscript {
     }
     
     static void StartingScreen() {
-        GameFunction.Display_StartingScreen();
+        GameDisplay.StartingScreen();
         userInput = new Scanner(System.in);
         String playerName = "";
         int playerRace = 1;
@@ -24,13 +24,13 @@ public class mainscript {
             System.out.print("Name: ");
             playerName = userInput.nextLine();
             if (playerName.length() > 5) {
-                GameFunction.Display_StartingScreen();
+                GameDisplay.StartingScreen();
                 System.out.println("----------------------");
                 System.out.println("Your Name is too Long.");
                 System.out.println("----------------------");
             }
             else if (playerName.length() <= 2) {
-                GameFunction.Display_StartingScreen();
+                GameDisplay.StartingScreen();
                 System.out.println("----------------------");
                 System.out.println("Your Name is too short.");
                 System.out.println("----------------------");
@@ -39,41 +39,35 @@ public class mainscript {
         boolean inputViolated = false;
         do {
             System.out.println("Choose your race: \n [1]Human [2]Demon [3]Elf [4]Beast");
-            try {
-                playerRace = userInput.nextInt();
-                inputViolated = false;
-                if (playerRace < 1 || playerRace > 4) {
-                    System.out.println("Invalid");
-                    inputViolated = true;
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid");
-                userInput = new Scanner(System.in);
-                inputViolated = true;
-            }
-        } while (inputViolated);
-        switch (playerRace) {
+           playerRace = GameFunction.UserInput(1, 4, userInput);
+            switch (playerRace) {
             case 1:
-                player = new player(playerName,1,100,3,0,1,10,0,"Human");
+                GameDisplay.HumanDescription();
+                player = new player(playerName,1,100,5,0,1,10,0,"Human");
                 break;
             case 2:
+                GameDisplay.DemonDescription();
                 player = new player(playerName,1,100,4,5,2,10,0,"Demon");
                 break;
             case 3:
+                GameDisplay.ElfDescription();
                 player = new player(playerName,1,100,2,7,1,10,0,"Elf");
                 break;
             case 4:
+                GameDisplay.BeastDescription();    
                 player = new player(playerName,1,100,7,2,2,10,0,"Beast");
                 break;
             default:
                 System.out.println("Error occured. Please Restart the game.");
                 break;
-        }
+            }
+        } while (inputViolated);
+       
     }
 
     static void MainGame() {
         boolean inputViolated = false;
-        GameFunction.Display_MainGame();
+        GameDisplay.MainGame();
         do {
              try {
                 int input = userInput.nextInt();
@@ -87,13 +81,13 @@ public class mainscript {
                         inputViolated = false; 
                         break;
                     default:
-                        GameFunction.Display_MainGame();
+                        GameDisplay.MainGame();
                         System.out.println("Invalid Input");           
                         inputViolated = true;
                         break;
                 }
             } catch (Exception e) {
-            GameFunction.Display_MainGame();
+            GameDisplay.MainGame();
             System.out.println("Invalid Input: " + e);
             userInput = new Scanner(System.in);
             inputViolated = true;
@@ -102,7 +96,7 @@ public class mainscript {
     }
 
     static void Adventure() {
-        System.out.println("You departed from your base to start your adventure...");
+        GameDisplay.DepartedFromBase();
         OnAdventure = true;
         do {
             EncounterMonster();
@@ -112,7 +106,7 @@ public class mainscript {
     //three main situations: ENCOUNTER, DISCOVERY, EXPLORE 
     static void EncounterMonster() {
         GameFunction.GenerateMonster();
-        System.out.println("\n\n\nYou Encounter A " + monster.name + "!\n");
+        GameDisplay.EnemyEncounter();
         do {
             BattleMode();
         } while (BattleOver == false);
@@ -124,6 +118,9 @@ public class mainscript {
         boolean playerTurn = false;
         if (player.spd >= monster.spd) {
             playerTurn = true;
+            GameDisplay.BattleSpeedTurnSentence(playerTurn);
+        } else {
+            GameDisplay.BattleSpeedTurnSentence(playerTurn);
         }
         do {
             //Player turn:
@@ -132,7 +129,7 @@ public class mainscript {
                 boolean inputViolated = false;
                 do {
                     try {
-                    GameFunction.Display_BattleModeYourTurn();
+                    GameDisplay.BattleModeYourTurn();
                     int input = userInput.nextInt();
                     switch (input) {
                         case 1:
@@ -150,14 +147,14 @@ public class mainscript {
                             break;
                     
                         default:
-                            GameFunction.Display_BattleModeYourTurn();
+                            GameDisplay.BattleModeYourTurn();
                             System.out.println("Invalid Input\n\n\n\n");
                             inputViolated = true;
                             break;
                         }
                     //player attacks: function is inside GameFunction.PlayerAttack()
                     } catch (Exception e) {
-                        GameFunction.Display_BattleModeYourTurn();
+                        GameDisplay.BattleModeYourTurn();
                         System.out.println("Invalid Input: " + e + "\n\n\n\n");
                         userInput = new Scanner(System.in);
                         inputViolated = true;

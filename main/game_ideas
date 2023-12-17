@@ -20,6 +20,12 @@ stats:
     STR RES
     MAG RES
 
+skills:
+    sword
+    staff
+    fist
+    
+
 elements:
     fire
     water
