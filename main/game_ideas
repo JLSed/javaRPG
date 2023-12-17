@@ -11,8 +11,33 @@ stats:
     HP
     STR
     MAG
+    
     STA
     SPD
+
+    DEF
+    PEN
+    STR RES
+    MAG RES
+
+elements:
+    fire
+    water
+    wind
+    ground
+    electric
+    wood
+    ice
+
+    water > fire > wood > ground > wind > electric > ice > water
+        50% dmg increase
+
+element reaction:
+    fire - ice = melt
+    ice - water = freeze
+    wood - water =
+    ground - water =
+
 
 weapon stats:
     physical attack

@@ -54,16 +54,16 @@ public class mainscript {
         } while (inputViolated);
         switch (playerRace) {
             case 1:
-                player = new player(playerName,1,100,1,10,3,0,10,0,"Human");
+                player = new player(playerName,1,100,3,0,1,10,0,"Human");
                 break;
             case 2:
-                player = new player(playerName,1,100,1,10,4,5,10,0,"Demon");
+                player = new player(playerName,1,100,4,5,2,10,0,"Demon");
                 break;
             case 3:
-                player = new player(playerName,1,100,1,10,2,7,10,0,"Elf");
+                player = new player(playerName,1,100,2,7,1,10,0,"Elf");
                 break;
             case 4:
-                player = new player(playerName,1,100,1,10,7,2,10,0,"Beast");
+                player = new player(playerName,1,100,7,2,2,10,0,"Beast");
                 break;
             default:
                 System.out.println("Error occured. Please Restart the game.");
@@ -122,7 +122,7 @@ public class mainscript {
     static void BattleMode() {
         BattleOver = false;
         boolean playerTurn = false;
-        if (player.spd > monster.speed) {
+        if (player.spd >= monster.spd) {
             playerTurn = true;
         }
         do {
@@ -165,7 +165,7 @@ public class mainscript {
                 } while (inputViolated);
                 // Enemy turn:
             } else {
-                GameFunction.EnemyAttack();
+                GameFunction.EnemyAttack(monster);
                 GameFunction.VisualDelay(400);
                 GameFunction.PlayerDeadChecker();
                 playerTurn = true;
