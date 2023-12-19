@@ -7,24 +7,24 @@ public class player {
     int exp, currentExp;
     int maxHP;
     int currentHP = maxHP;
-
-    int spd, str, mag, def;
+    int str, mag, agi, dex, luk, sta,spd;
+    int def, mdef;
 
     double modeOfDmg;
     double basedmg_multiplier = 1.0;
     double def_penetration = 1.0; //0.0 means 100% pen, 1.0 means 0% pen ; for visual: (1.0 - def_penetration) * 100
     
-    public player(String playerName, int playerLevel, int playerHealth, int playerStr, int playerMag, int playerDef, int playerSpeed, int playerExp, String playerRace) {
-        name = playerName;
-        race = playerRace;
-        level = playerLevel;
-        maxHP = playerHealth;
+    public player(String pName, int pLevel, int pHealth, int pStr, int pMag, int pAgi, int pDex, int pLuk, int pSta, int pDef, int pMdef, int pSpeed, int pExp, String pRace) {
+        name = pName;
+        race = pRace;
+        level = pLevel;
+        maxHP = pHealth;
         currentHP = maxHP;
 
-        str = playerStr;
-        mag = playerMag;
-        spd = playerSpeed;
-        def = playerDef;
+        str = pStr;
+        mag = pMag;
+        spd = pSpeed;
+        def = pDef;
 
         exp = BaseExpUpdate();
 

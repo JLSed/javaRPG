@@ -83,7 +83,7 @@ public class GameDisplay {
     }
 
     static void HumanDescription() {
-        System.out.println("Demon Race:");
+        System.out.println("Human Race:");
         System.out.println("────────────────────────────────");
         System.out.println("HP: 100\t\t\tMP:50");
         System.out.println("STR: 5\t\t\tDEF:10");
@@ -107,7 +107,7 @@ public class GameDisplay {
     }
 
     static void ElfDescription() {
-        System.out.println("Demon Race:");
+        System.out.println("Elf Race:");
         System.out.println("────────────────────────────────");
         System.out.println("HP: 100\t\t\tMP:100");
         System.out.println("STR: 2\t\t\tDEF:5");
@@ -119,7 +119,7 @@ public class GameDisplay {
     }
 
     static void BeastDescription() {
-        System.out.println("Demon Race:");
+        System.out.println("Beast Race:");
         System.out.println("────────────────────────────────");
         System.out.println("HP: 100\t\t\tMP:100");
         System.out.println("STR: 7\t\t\tDEF:15");

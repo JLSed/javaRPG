@@ -40,29 +40,63 @@ public class mainscript {
         do {
             System.out.println("Choose your race: \n [1]Human [2]Demon [3]Elf [4]Beast");
             playerRace = GameFunction.UserInput(1,4);
+            int input = 0;
+            switch (playerRace) {
+                case 1:
+                    do {
+                        GameDisplay.HumanDescription();
+                        input = GameFunction.UserInput(1, 2);
+                    } while (input == -1);
+                    if (input == 1) {
+                        player = new player(playerName, 1, 100, 5, 1, 10, 10, 50, 105, 10, 2, 10, 0,"Human");
+                    } else if(input == 2) {
+                        playerRace = -1;
+                        continue;                    
+                    }
+                    break;
+                case 2:
+                    do {
+                        GameDisplay.DemonDescription();
+                        input = GameFunction.UserInput(1, 2);
+                    } while (input == -1);
+                    if (input == 1) {
+                                    player = new player(playerName, 1, 100, 4, 5, 10, 10, 50, 100, 5, 5, 10, 0,"Demon");
+                    } else if(input == 2) {
+                        playerRace = -1;
+                        continue;                    
+                    }
+                    break;
+                case 3:
+                    do {
+                        GameDisplay.ElfDescription();
+                        input = GameFunction.UserInput(1, 2);
+                    } while (input == -1);
+                    if (input == 1) {
+                        player = new player(playerName, 1, 100, 2, 7, 10, 15, 50, 100, 5, 15, 10, 0,"Elf");
+                    } else if(input == 2) {
+                        playerRace = -1;
+                        continue;                    
+                    }
+                    break;
+                case 4:
+                    do {
+                        GameDisplay.BeastDescription(); 
+                        input = GameFunction.UserInput(1, 2);
+                    } while (input == -1);
+                    if (input == 1) {
+                        player = new player(playerName, 1, 100, 7, 2, 15, 10, 50, 110, 15, 5, 10, 0,"Beast");
+                    } else if(input == 2) {
+                        playerRace = -1;
+                        continue;                    
+                    }
+                       
+                    break;
+                default:
+                    System.out.println("Invalid Input");
+                    break;
+            }
         } while (playerRace == -1);
-
-        switch (playerRace) {
-        case 1:
-            GameDisplay.HumanDescription();
-            player = new player(playerName,1,100,5,0,1,10,0,"Human");
-            break;
-        case 2:
-            GameDisplay.DemonDescription();
-            player = new player(playerName,1,100,4,5,2,10,0,"Demon");
-            break;
-        case 3:
-            GameDisplay.ElfDescription();
-            player = new player(playerName,1,100,2,7,1,10,0,"Elf");
-            break;
-        case 4:
-            GameDisplay.BeastDescription();    
-            player = new player(playerName,1,100,7,2,2,10,0,"Beast");
-            break;
-        default:
-            System.out.println("Error occured. Please Restart the game.");
-            break;
-        }
+        
     }
 
     static void MainGame() {
