@@ -19,7 +19,7 @@ public class mainscript {
         GameDisplay.StartingScreen();
         userInput = new Scanner(System.in);
         String playerName = "";
-        int playerRace = 1;
+        int playerRace = 0;
         do {
             System.out.print("Name: ");
             playerName = userInput.nextLine();
@@ -36,63 +36,54 @@ public class mainscript {
                 System.out.println("----------------------");
             }
         } while (playerName.length() > 5 || playerName.length() <= 2);
-        boolean inputViolated = false;
+
         do {
             System.out.println("Choose your race: \n [1]Human [2]Demon [3]Elf [4]Beast");
-           playerRace = GameFunction.UserInput(1, 4, userInput);
-            switch (playerRace) {
-            case 1:
-                GameDisplay.HumanDescription();
-                player = new player(playerName,1,100,5,0,1,10,0,"Human");
-                break;
-            case 2:
-                GameDisplay.DemonDescription();
-                player = new player(playerName,1,100,4,5,2,10,0,"Demon");
-                break;
-            case 3:
-                GameDisplay.ElfDescription();
-                player = new player(playerName,1,100,2,7,1,10,0,"Elf");
-                break;
-            case 4:
-                GameDisplay.BeastDescription();    
-                player = new player(playerName,1,100,7,2,2,10,0,"Beast");
-                break;
-            default:
-                System.out.println("Error occured. Please Restart the game.");
-                break;
-            }
-        } while (inputViolated);
-       
+            playerRace = GameFunction.UserInput(1,4);
+        } while (playerRace == -1);
+
+        switch (playerRace) {
+        case 1:
+            GameDisplay.HumanDescription();
+            player = new player(playerName,1,100,5,0,1,10,0,"Human");
+            break;
+        case 2:
+            GameDisplay.DemonDescription();
+            player = new player(playerName,1,100,4,5,2,10,0,"Demon");
+            break;
+        case 3:
+            GameDisplay.ElfDescription();
+            player = new player(playerName,1,100,2,7,1,10,0,"Elf");
+            break;
+        case 4:
+            GameDisplay.BeastDescription();    
+            player = new player(playerName,1,100,7,2,2,10,0,"Beast");
+            break;
+        default:
+            System.out.println("Error occured. Please Restart the game.");
+            break;
+        }
     }
 
     static void MainGame() {
-        boolean inputViolated = false;
+        int input;
         GameDisplay.MainGame();
         do {
-             try {
-                int input = userInput.nextInt();
-                switch (input) {
-                    case 1:
-                        inputViolated = false;
-                        Adventure();    
-                        break;
-                    case 2: 
-                        System.out.println("Exit");
-                        inputViolated = false; 
-                        break;
-                    default:
-                        GameDisplay.MainGame();
-                        System.out.println("Invalid Input");           
-                        inputViolated = true;
-                        break;
-                }
-            } catch (Exception e) {
-            GameDisplay.MainGame();
-            System.out.println("Invalid Input: " + e);
-            userInput = new Scanner(System.in);
-            inputViolated = true;
-            }
-        } while (inputViolated);
+            input = GameFunction.UserInput(1, 2);
+        } while (input == -1);
+
+        switch (input) {
+            case 1:
+                Adventure();    
+                break;
+            case 2: 
+                System.out.println("Exit");
+                break;
+            default:
+                GameDisplay.MainGame();
+                System.out.println("Invalid Input");           
+                break;
+        }
     }
 
     static void Adventure() {
@@ -122,45 +113,36 @@ public class mainscript {
         } else {
             GameDisplay.BattleSpeedTurnSentence(playerTurn);
         }
+        
+        
         do {
             //Player turn:
             if (playerTurn == true) {
-                userInput = new Scanner(System.in);
-                boolean inputViolated = false;
+                int input = 0;
                 do {
-                    try {
                     GameDisplay.BattleModeYourTurn();
-                    int input = userInput.nextInt();
-                    switch (input) {
-                        case 1:
-                            GameFunction.PlayerAttack(player);
-                            GameFunction.VisualDelay(400);
-                            if (GameFunction.EnemyDead() == true) {
-                                // GameFunction.EnemyDead() is also where the exp earn function is.
-                                BattleOver = true;
-                                continue;
-                            }
-                            playerTurn = false; inputViolated = false;                                
-                            break;
-                        case 2:
-                            System.out.println("You Ran.");
-                            break;
-                    
-                        default:
-                            GameDisplay.BattleModeYourTurn();
-                            System.out.println("Invalid Input\n\n\n\n");
-                            inputViolated = true;
-                            break;
+                    input = GameFunction.UserInput(1, 2);
+                } while (input == -1);
+                switch (input) {
+                    case 1:
+                        GameFunction.PlayerAttack(player);
+                        GameFunction.VisualDelay(400);
+                        if (GameFunction.EnemyDead() == true) {
+                            // GameFunction.EnemyDead() is also where the exp earn function is.
+                            BattleOver = true;
+                            continue;
                         }
-                    //player attacks: function is inside GameFunction.PlayerAttack()
-                    } catch (Exception e) {
+                        playerTurn = false;                               
+                        break;
+                    case 2:
+                        System.out.println("You Ran.");
+                        break;
+                    default:
                         GameDisplay.BattleModeYourTurn();
-                        System.out.println("Invalid Input: " + e + "\n\n\n\n");
-                        userInput = new Scanner(System.in);
-                        inputViolated = true;
+                        System.out.println("Invalid Input\n\n\n\n");
+                        break;
                     }
-                } while (inputViolated);
-                // Enemy turn:
+            // Enemy turn:
             } else {
                 GameFunction.EnemyAttack(monster);
                 GameFunction.VisualDelay(400);

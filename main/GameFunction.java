@@ -12,22 +12,23 @@ public class GameFunction {
 
     //GAME FUNCTIONS
     public static int rng(int min, int max) {
-        Random rand = new Random();
-        return rand.nextInt((max +=1) - min) + min;
+        return new Random().nextInt((max - min) + 1) + min;
     }
 
-    public static int UserInput(int min, int max, Scanner userinput) {
+    public static int UserInput(int min, int max) {
+        mainscript.userInput = new Scanner(System.in);
+        int inputHolder = 0;
         try {
-            int inputHolder = userinput.nextInt();
-            if (inputHolder >= min && inputHolder <= max) {
-                return inputHolder;
-            } else {
-                return UserInput(min, max, userinput);
-            }
+            inputHolder = mainscript.userInput.nextInt();
         } catch (Exception e) {
-            System.out.println("Invalid");
-            userinput = new Scanner(System.in);
-            return UserInput(min, max, userinput);
+            System.out.println("Invalid " + e);
+            mainscript.userInput = new Scanner(System.in);
+            return -1;
+        }
+        if (inputHolder >= min && inputHolder <= max) {
+            return inputHolder;
+        } else {
+            return -1;
         }
     }
 
@@ -35,7 +36,7 @@ public class GameFunction {
         String[] monsterName = {"Phantom Scourge", "Haunt", "Phantom of Purgatory", "Water Elemental", "Ghost Seeker",
         "Forest Brute", "Dark Fury", "Night Hunter", "Blood Savage", "Hair Demon", "The Cold Mutt", "Abyss Talon", "Emberling",
         "Bronze Worm", "Gaswings", "Warphood", "Cryptbeast", "Blight Cat", "Thunder Elemental", "Earth Elemental", "Void Elemental"};
-        mainscript.monster =  new monster(monsterName[(int)GameFunction.rng(1, monsterName.length)], 1, 100, 7, 7, 1,10);
+        mainscript.monster =  new monster(monsterName[(int)GameFunction.rng(0, monsterName.length)], 1, 100, 7, 7, 1,10);
     }
 
     public static void PlayerAttack(player player) {

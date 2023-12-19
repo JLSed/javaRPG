@@ -27,7 +27,7 @@ public class GameDisplay {
         for (int i = 0; i < text.length() ; i++) {
             try {
                 System.out.print(text.charAt(i));
-            } finally {
+            } catch (Exception e) {
                 System.out.println(text);
             }
             GameFunction.VisualDelay(25);
