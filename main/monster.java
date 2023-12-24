@@ -1,18 +1,6 @@
 package main;
-public class monster {
-    String name;
-    String race;
-    int level;
-    int exp, currentExp;
-    int maxHP;
-    int currentHP = maxHP;
-
-    int spd, str, mag, def;
-
-    double modeOfDmg;
-    double basedmg_multiplier = 1.0;
-    double def_penetration = 1.0;
-
+public class monster extends Stats{
+    
     public monster(String monsterName, int monsterLevel, int monsterHealth, int monsterStr, int monsterMag, int monsterDef , int monsterSpeed) {
         name = monsterName;
         level = monsterLevel;

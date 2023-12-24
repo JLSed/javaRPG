@@ -2,9 +2,9 @@ package main;
 import java.util.Scanner;
 
 
-public class mainscript {
+public class Mainscript {
     static Scanner userInput;
-    static player player;
+    static Player player;
     static monster monster;
     static boolean OnAdventure;
     static boolean BattleOver;
@@ -48,7 +48,7 @@ public class mainscript {
                         input = GameFunction.UserInput(1, 2);
                     } while (input == -1);
                     if (input == 1) {
-                        player = new player(playerName, 1, 100, 5, 1, 10, 10, 50, 105, 10, 2, 10, 0,"Human");
+                        player = new Player(playerRace, playerName);
                     } else if(input == 2) {
                         playerRace = -1;
                         continue;                    
@@ -60,7 +60,7 @@ public class mainscript {
                         input = GameFunction.UserInput(1, 2);
                     } while (input == -1);
                     if (input == 1) {
-                                    player = new player(playerName, 1, 100, 4, 5, 10, 10, 50, 100, 5, 5, 10, 0,"Demon");
+                        player = new Player(playerRace, playerName);
                     } else if(input == 2) {
                         playerRace = -1;
                         continue;                    
@@ -72,7 +72,7 @@ public class mainscript {
                         input = GameFunction.UserInput(1, 2);
                     } while (input == -1);
                     if (input == 1) {
-                        player = new player(playerName, 1, 100, 2, 7, 10, 15, 50, 100, 5, 15, 10, 0,"Elf");
+                        player = new Player(playerRace, playerName);
                     } else if(input == 2) {
                         playerRace = -1;
                         continue;                    
@@ -84,12 +84,11 @@ public class mainscript {
                         input = GameFunction.UserInput(1, 2);
                     } while (input == -1);
                     if (input == 1) {
-                        player = new player(playerName, 1, 100, 7, 2, 15, 10, 50, 110, 15, 5, 10, 0,"Beast");
+                        player = new Player(playerRace, playerName);
                     } else if(input == 2) {
                         playerRace = -1;
                         continue;                    
                     }
-                       
                     break;
                 default:
                     System.out.println("Invalid Input");

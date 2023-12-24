@@ -14,10 +14,10 @@ public class GameDisplay {
 
     static void MainGame() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.println("   ___I_      Name: " + mainscript.player.name);
-        System.out.println("  /\\-_--\\    Level: " + mainscript.player.level);
-        System.out.println(" /  \\_-__\\    Race: " + mainscript.player.race);
-        System.out.println(" |[]| [] |     Exp: " + mainscript.player.currentExp + "/" + mainscript.player.exp);
+        System.out.println("   ___I_      Name: " + Mainscript.player.name);
+        System.out.println("  /\\-_--\\    Level: " + Mainscript.player.level);
+        System.out.println(" /  \\_-__\\    Race: " + Mainscript.player.race);
+        System.out.println(" |[]| [] |     Exp: " + Mainscript.player.currentExp + "/" + Mainscript.player.exp);
         System.out.println("────────────────────────────────");
         System.out.println("[1] Adventure | [2] Exit Game");
     }
@@ -39,7 +39,7 @@ public class GameDisplay {
         for (int i = 0; i < 4; i++) {
             System.out.print("                                       \r");  
             GameFunction.VisualDelay(i * 150);  
-            System.out.print("You Encounter A " + mainscript.monster.name + "!\r");
+            System.out.print("You Encounter A " + Mainscript.monster.name + "!\r");
             GameFunction.VisualDelay(i * 250);
         }
         GameFunction.VisualDelay(100);
@@ -47,8 +47,8 @@ public class GameDisplay {
     }
 
     static void BattleModeYourTurn() {
-        System.out.println("Current Exp: " + mainscript.player.currentExp  + "/" + mainscript.player.exp);
-        System.out.println(mainscript.player.name+": " + mainscript.player.currentHP +"|----|"+ mainscript.monster.currentHP+" :" + mainscript.monster.name);
+        System.out.println("Current Exp: " + Mainscript.player.currentExp  + "/" + Mainscript.player.exp);
+        System.out.println(Mainscript.player.name+": " + Mainscript.player.currentHP +"|----|"+ Mainscript.monster.currentHP+" :" + Mainscript.monster.name);
         System.out.println("Your Turn:");
         System.out.println("[1] Attack       [2] Run");
     }
@@ -109,7 +109,7 @@ public class GameDisplay {
     static void ElfDescription() {
         System.out.println("Elf Race:");
         System.out.println("────────────────────────────────");
-        System.out.println("HP: 100\t\t\tMP:100");
+        System.out.println("HP: 100\t\t\tMP:200");
         System.out.println("STR: 2\t\t\tDEF:5");
         System.out.println("MAG: 7\t\t\tMDEF:15");
         System.out.println("AGI: 10\t\t\tDEX:15");
