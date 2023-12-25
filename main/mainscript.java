@@ -8,7 +8,7 @@ public class Mainscript {
     static monster monster;
     static boolean OnAdventure;
     static boolean BattleOver;
-
+    static RaceDescription[] raceInfo = {new HumanDescription(), new DemonDescription(), new ElfDescription(), new BeastDescription()};
     public static void main(String[] args) {
         StartingScreen();
         MainGame();
@@ -38,61 +38,29 @@ public class Mainscript {
         } while (playerName.length() > 5 || playerName.length() <= 2);
 
         do {
-            System.out.println("Choose your race: \n [1]Human [2]Demon [3]Elf [4]Beast");
-            playerRace = GameFunction.UserInput(1,4);
             int input = 0;
-            switch (playerRace) {
-                case 1:
+            RaceDescription chosenRace = null;
+            System.out.println("Choose your race: ");
+            for (int i = 0; i < raceInfo.length; i++) {
+                System.out.print("[" + i + "]" + raceInfo[i].RaceName() + " ");
+            }
+            System.out.print("\n: ");
+            playerRace = GameFunction.UserInput(0, raceInfo.length);
+            for (int i = 0; i < raceInfo.length; i++) {
+                if (playerRace == i) {
                     do {
-                        GameDisplay.HumanDescription();
+                        chosenRace = raceInfo[i];
+                        System.out.println(chosenRace);
+                        raceInfo[i].ShowInfo();
                         input = GameFunction.UserInput(1, 2);
                     } while (input == -1);
-                    if (input == 1) {
-                        player = new Player(playerRace, playerName);
-                    } else if(input == 2) {
-                        playerRace = -1;
-                        continue;                    
-                    }
-                    break;
-                case 2:
-                    do {
-                        GameDisplay.DemonDescription();
-                        input = GameFunction.UserInput(1, 2);
-                    } while (input == -1);
-                    if (input == 1) {
-                        player = new Player(playerRace, playerName);
-                    } else if(input == 2) {
-                        playerRace = -1;
-                        continue;                    
-                    }
-                    break;
-                case 3:
-                    do {
-                        GameDisplay.ElfDescription();
-                        input = GameFunction.UserInput(1, 2);
-                    } while (input == -1);
-                    if (input == 1) {
-                        player = new Player(playerRace, playerName);
-                    } else if(input == 2) {
-                        playerRace = -1;
-                        continue;                    
-                    }
-                    break;
-                case 4:
-                    do {
-                        GameDisplay.BeastDescription(); 
-                        input = GameFunction.UserInput(1, 2);
-                    } while (input == -1);
-                    if (input == 1) {
-                        player = new Player(playerRace, playerName);
-                    } else if(input == 2) {
-                        playerRace = -1;
-                        continue;                    
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid Input");
-                    break;
+                }
+            }
+            if (input == 1) {
+                player = new Player(chosenRace, playerName);
+            } else if (input == 2) {
+                playerRace = -1;
+                continue;
             }
         } while (playerRace == -1);
         

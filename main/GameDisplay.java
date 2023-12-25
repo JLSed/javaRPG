@@ -81,53 +81,6 @@ public class GameDisplay {
             System.out.println(text[GameFunction.rng(0, text.length)] + "\n");
         }
     }
-
-    static void HumanDescription() {
-        System.out.println("Human Race:");
-        System.out.println("────────────────────────────────");
-        System.out.println("HP: 100\t\t\tMP:50");
-        System.out.println("STR: 5\t\t\tDEF:10");
-        System.out.println("MAG: 1\t\t\tMDEF:2");
-        System.out.println("AGI: 10\t\t\tDEX:10");
-        System.out.println("STA: 105\t\tLUK: 50");
-        System.out.println("────────────────────────────────");
-        System.out.println("Continue with Human Race? [1]Yes [2]No");
-    }
-
-    static void DemonDescription() {
-        System.out.println("Demon Race:");
-        System.out.println("────────────────────────────────");
-        System.out.println("HP: 100\t\t\tMP:100");
-        System.out.println("STR: 4\t\t\tDEF:5");
-        System.out.println("MAG: 5\t\t\tMDEF:5");
-        System.out.println("AGI: 10\t\t\tDEX:10");
-        System.out.println("STA: 100\t\tLUK: 50");
-        System.out.println("────────────────────────────────");
-        System.out.println("Continue with Demon Race? [1]Yes [2]No");
-    }
-
-    static void ElfDescription() {
-        System.out.println("Elf Race:");
-        System.out.println("────────────────────────────────");
-        System.out.println("HP: 100\t\t\tMP:200");
-        System.out.println("STR: 2\t\t\tDEF:5");
-        System.out.println("MAG: 7\t\t\tMDEF:15");
-        System.out.println("AGI: 10\t\t\tDEX:15");
-        System.out.println("STA: 100\t\tLUK: 50");
-        System.out.println("────────────────────────────────");
-        System.out.println("Continue with Elf Race? [1]Yes [2]No");
-    }
-
-    static void BeastDescription() {
-        System.out.println("Beast Race:");
-        System.out.println("────────────────────────────────");
-        System.out.println("HP: 100\t\t\tMP:100");
-        System.out.println("STR: 7\t\t\tDEF:15");
-        System.out.println("MAG: 2\t\t\tMDEF:5");
-        System.out.println("AGI: 15\t\t\tDEX:10");
-        System.out.println("STA: 110\t\tLUK: 50");
-        System.out.println("────────────────────────────────");
-        System.out.println("Continue with Beast Race? [1]Yes [2]No");
-    }
-
 }
+
+
