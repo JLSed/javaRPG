@@ -2,12 +2,13 @@
 class Stats {
     protected String name;
     protected String race;
-    protected int level;
+    protected int lvl;
     protected int exp, currentEXP;
     protected int hp, currentHP;
     protected int mp, currentMP;
-    protected int str, mag, agi, dex, luk, sta, spd;
+    protected int sta, currentSta;
     protected int def, mdef;
+    protected int str, mag, agi, dex, luk, spd;
 
     // attack modifiers
     protected double baseDmgMultiplier = 1.0;
