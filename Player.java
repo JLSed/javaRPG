@@ -1,11 +1,14 @@
 
 public class Player extends Stats {
 
-    // TODO: initialize player
-    public Player(String name, String race) {
-        this.name = name;
-        this.race = race;
-    }
+    // public Player(String name, String race) {
+    // this.name = name;
+    // this.race = race;
+    // }
+
+    // public Player() {
+
+    // }
 
     public void setBasicStats(int hp, int mp, int def, int mdef, int sta) {
         this.hp = hp;
