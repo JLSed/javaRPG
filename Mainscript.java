@@ -1,4 +1,7 @@
+
 import java.util.Scanner;
+import script.GameFunction;
+import player.Player;
 
 public class Mainscript {
 
@@ -6,7 +9,7 @@ public class Mainscript {
         Scanner scanner = new Scanner(System.in);
         Player player = new Player();
         GameDisplay.StartingScreen();
-        GameDisplay.MakeNewCharacter(scanner, player);
+        GameDisplay.MakeNewCharacter(StringInput(scanner), player);
         System.out.println(player.name);
 
     }

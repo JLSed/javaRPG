@@ -11,10 +11,10 @@ public class GameDisplay {
         System.out.println("---Welcome to JavaRPG---");
     }
 
-    public static void MakeNewCharacter(Scanner scanner, Player player) {
+    public static void MakeNewCharacter(String input, Player player) {
         System.out.println("---New Character---");
         System.out.print("Name: ");
-        player.name = scanner.nextLine();
+        player.name = input;
 
     }
 }
