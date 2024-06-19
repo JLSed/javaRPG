@@ -1,4 +1,4 @@
-
+package player;
 public class Player extends Stats {
 
     // public Player(String name, String race) {

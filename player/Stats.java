@@ -1,3 +1,4 @@
+package player;
 
 class Stats {
     protected String name;
