@@ -1,14 +1,14 @@
 package player;
 public class Player extends Stats {
 
-    // public Player(String name, String race) {
-    // this.name = name;
-    // this.race = race;
-    // }
+    public Player(String name, String race) {
+        this.name = name;
+        this.race = race;
+    }
 
-    // public Player() {
-
-    // }
+    public Player(String name) {
+        this.name = name;
+    }
 
     public void setBasicStats(int hp, int mp, int def, int mdef, int sta) {
         this.hp = hp;
@@ -36,6 +36,9 @@ public class Player extends Stats {
         this.exp = exp;
 
         this.currentEXP = this.exp;
+    }
 
+    public String getName() {
+        return this.name;
     }
 }

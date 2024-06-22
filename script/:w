@@ -1,20 +1,22 @@
+package script;
+
 import java.util.Scanner;
+import player.Player;
 
-public class GameDisplay {
+public class Gd{
 
-    public static void StartingScreen() {
+    public static void startingScreen() {
         System.out.println("\n─────────█▄██▄█─────────\r\n" + //
                 "█▄█▄█▄█▄█▐█┼██▌█▄█▄█▄█▄█\r\n" + //
                 "███┼█████▐████▌█████┼███\r\n" + //
                 "█████████▐████▌█████████\r" + //
                 "");
-        System.out.println("---Welcome to JavaRPG---");
+        System.out.println("---Welcome to JavaRPG---\n\n");
     }
-
-    public static void MakeNewCharacter(String input, Player player) {
+    
+    public static void makeNewCharacter() {
         System.out.println("---New Character---");
         System.out.print("Name: ");
-        player.name = input;
+    }   
 
-    }
 }

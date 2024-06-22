@@ -2,9 +2,11 @@ package script;
 
 import java.util.Scanner;
 
-public class GameFunction {
+import player.Player;
 
-    public static String StringInput(Scanner scanner) {
+public class Gf{
+
+    public static String stringInput(Scanner scanner) {
         String input = scanner.nextLine();
         if (input.matches("^[a-zA-Z]+$")) {
             return input;
@@ -12,6 +14,11 @@ public class GameFunction {
             System.out.println("Invalid Input.");
         }
         return null;
+    }
+
+   public static Player makeNewPlayer(String input) {
+        Player player = new Player(input);
+        return player;
     }
 
 }
