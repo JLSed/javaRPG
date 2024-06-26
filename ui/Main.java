@@ -21,7 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-
 import player.Player;
 import script.Gf; // Game Functions
 import script.Gd; // Game Displays
@@ -36,8 +35,8 @@ public class Main extends JFrame {
         setTitle("Java RPG");
         setSize(600, 400);
         setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-
 
         // STARTING SCREEN
         StartingMenu();
@@ -46,12 +45,11 @@ public class Main extends JFrame {
         }
         // JTextArea StartingMenuScreen = new JTextArea("ghello :)");
         // StartingMenuScreen.setBackground(Color.BLACK);
-        // add(StartingMenuScreen, BorderLayout.CENTER);        
+        // add(StartingMenuScreen, BorderLayout.CENTER);
         setVisible(true);
         // if (player == null) {
-        //     StartingMenu();
+        // StartingMenu();
         // }
-            
 
     }
 
@@ -59,12 +57,12 @@ public class Main extends JFrame {
         JPanel StartingMenuPanel = new JPanel();
         JPanel SMbuttonPanel = new JPanel();
         StartingMenuPanel.setLayout(null);
-        SMbuttonPanel.setLayout(new GridLayout(3,1,100,20));
+        SMbuttonPanel.setLayout(new GridLayout(3, 1, 100, 20));
         StartingMenuPanel.setBackground(Color.BLACK);
         SMbuttonPanel.setBackground(Color.BLACK);
 
         JButton buttons[] = new JButton[3];
-        String labels[] = {"CONTINUE", "NEW", "QUIT"};
+        String labels[] = { "CONTINUE", "NEW", "QUIT" };
         for (int i = 0; i < buttons.length; i++) {
             final int ii = i;
             JButton b = new JButton(labels[i]);
@@ -77,11 +75,15 @@ public class Main extends JFrame {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyCode() == KeyEvent.VK_UP) {
-                        if (ii > 0) buttons[ii-1].requestFocus();
-                        if (ii == 0) buttons[2].requestFocus();
+                        if (ii > 0)
+                            buttons[ii - 1].requestFocus();
+                        if (ii == 0)
+                            buttons[2].requestFocus();
                     } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                        if (ii < 2) buttons[ii+1].requestFocus();
-                        if (ii == 2) buttons[0].requestFocus();
+                        if (ii < 2)
+                            buttons[ii + 1].requestFocus();
+                        if (ii == 2)
+                            buttons[0].requestFocus();
                     }
                 }
             });
@@ -90,6 +92,7 @@ public class Main extends JFrame {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        // TODO:
                         if (b.getText().equals("CONTINUE")) {
                             System.out.println(b.getText());
                             Choice = 1;
@@ -120,20 +123,20 @@ public class Main extends JFrame {
                 }
             });
             SMbuttonPanel.add(buttons[i] = b);
-            }
-        SMbuttonPanel.setBounds(235,200, 100,100);
+        }
+        SMbuttonPanel.setBounds(245, 200, 100, 100);
         StartingMenuPanel.add(SMbuttonPanel);
         JLabel SMTitle = new JLabel("javaRP{G}");
         SMTitle.setFont(new Font("Arial", Font.BOLD, 52));
-        SMTitle.setBounds(165, 10, 300, 200);
+        SMTitle.setBounds(175, 10, 300, 200);
         StartingMenuPanel.add(SMTitle);
         add(StartingMenuPanel, BorderLayout.CENTER);
 
         // Gd.startingScreen();
         // if (player == null) {
-        //     System.out.println("No Save Found");
-        //     Gd.makeNewCharacter();
-        //     player = Gf.makeNewPlayer(Gf.stringInput(scanner));
+        // System.out.println("No Save Found");
+        // Gd.makeNewCharacter();
+        // player = Gf.makeNewPlayer(Gf.stringInput(scanner));
         // } else {
 
         // }
@@ -146,13 +149,13 @@ public class Main extends JFrame {
         MainScreen.setForeground(Color.GREEN);
         MainScreen.setBackground(Color.BLACK);
         MainScreenContainer.add(MainScreen, BorderLayout.CENTER);
-        
+
         JTextField TestScreen = new JTextField("asdasd asdasd ");
         TestScreen.setBackground(Color.WHITE);
         TestScreen.setForeground(Color.BLACK);
         MainScreenContainer.setPreferredSize(new Dimension(200, 100));
         MainScreenContainer.add(TestScreen, BorderLayout.PAGE_END);
-    
+
         add(MainScreenContainer, BorderLayout.LINE_START);
 
         JPanel BottomPanel = new JPanel();
@@ -168,7 +171,7 @@ public class Main extends JFrame {
                 new Main();
             }
         });
-        
+
         // StartingMenu();
         // System.out.println(player.getName());
     }
