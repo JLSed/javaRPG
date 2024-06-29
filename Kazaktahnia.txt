@@ -1,0 +1,51 @@
+Continent: Kazaktahnia
+
+Religion:
+	Tahn - first god
+	Kazak - god of death
+	Ia - god of life
+
+Basmyl  - first human civilization
+	- master of magic
+	- many lost ancient artifacts made by the Basmylian people
+
+Foresthill
+	Rehbith Town
+
+Northcrest City
+
+Thornforest
+	Bacanak Tribe
+	Qifcak Tribe
+
+Revhrwood City
+
+Tahn Religion
+	- Believes in Tahn the first god
+	- Believes Tahn create the world 
+
+Fristahn
+Midhtahn
+Tridtahn
+Krushtahn - name of the main church
+
+Hawkhurst
+
+Frostveil
+
+Kinston City
+
+Ironfront Fortress
+
+Dreadveil Swamp
+
+Abyssal Rift
+
+Darkspire Fortress
+
+Wrathfall
+
+
+
+
+
