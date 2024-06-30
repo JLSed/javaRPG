@@ -1,5 +1,38 @@
 Continent: Kazaktahnia
 
+Race:
+	Human - balance
+	Elves - good with magic
+	Beast - bad with magic, good with physical, hard time with casting magic
+	Demon - good with magic, slightly better physical, hard time with coexisting with other Race
+		  - need something to change physical appearance when going to cities
+
+    elf - mag++++
+    human - phy++/mag++
+    demon - mag+++/phy++
+    beast - phy++++
+
+Race Relationship
+Human: Believes in Tahn
+	Elf - Neutral
+	Beast - Some are racist
+	Demon - Enemy
+
+Elves: Believes in Ia
+	Human - Some are racist
+	Beast - Enemy
+	Demon - Enemy
+
+Beast: Believes in Ia
+	Human - Neutral
+	Elf - Enemy
+	Demon - Enemy
+
+Demon: Believes in Kazak
+	Human - Enemy
+	Elf - Enemy
+	Beast - Enemy
+
 Religion:
 	Tahn - first god
 	Kazak - god of death
