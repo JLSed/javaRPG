@@ -1,11 +1,12 @@
 package ui;
 import java.awt.Color;
 import java.awt.GridLayout;
+
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,7 +16,7 @@ public class GameButton  extends JPanel {
 
     private JButton[][] buttons;
 
-    public GameButton(int row, int col, String labels[][], KeyListener buttonAction) {
+    public GameButton(int row, int col, String labels[][], ActionListener buttonAction) {
         super(new GridLayout(row, col, 20, 20));
         setBackground(Color.BLACK);
         buttons = new JButton[row][col];
@@ -28,32 +29,34 @@ public class GameButton  extends JPanel {
                 buttons[i][j].setForeground(Color.GREEN);
                 buttons[i][j].setFocusPainted(false);
                 buttons[i][j].setBorder(BorderFactory.createEmptyBorder());
-                buttons[i][j].addKeyListener(buttonAction);
                 buttons[i][j].addFocusListener(CurrentFocus);
+                buttons[i][j].addActionListener(buttonAction);
                 buttons[i][j].addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    switch (e.getKeyCode()) {
-                    case KeyEvent.VK_UP:
-                        if (curRow > 0)
-                            buttons[curRow - 1][curCol].requestFocus();
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        if (curRow < buttons.length - 1)
-                            buttons[curRow + 1][curCol].requestFocus();
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        if (curCol > 0)
-                            buttons[curRow][curCol - 1].requestFocus();
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        if (curCol < buttons[curRow].length - 1)
-                            buttons[curRow][curCol + 1].requestFocus();
-                        break;
-                    default:
-                        break;
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                        switch (e.getKeyCode()) {
+                        case KeyEvent.VK_UP:
+                            if (curRow > 0)
+                                buttons[curRow - 1][curCol].requestFocus();
+                            break;
+                        case KeyEvent.VK_DOWN:
+                            if (curRow < buttons.length - 1)
+                                buttons[curRow + 1][curCol].requestFocus();
+                            break;
+                        case KeyEvent.VK_LEFT:
+                            if (curCol > 0)
+                                buttons[curRow][curCol - 1].requestFocus();
+                            break;
+                        case KeyEvent.VK_RIGHT:
+                            if (curCol < buttons[curRow].length - 1)
+                                buttons[curRow][curCol + 1].requestFocus();
+                            break;
+                        case KeyEvent.VK_ENTER:
+                            ((JButton) e.getComponent()).doClick();
+                        default:
+                            break;
+                        }
                     }
-                }
                 });
                 add(buttons[i][j]);
             }

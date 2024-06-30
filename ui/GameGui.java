@@ -2,22 +2,15 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Scanner;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -28,9 +21,12 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import java.util.Scanner;
+
 import player.Player;
 import script.Gf; // Game Functions
 import script.Gd; // Game Displays
+import script.Game;
 
 public class GameGui extends JFrame {
 
@@ -44,12 +40,16 @@ public class GameGui extends JFrame {
         // setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-
+        // System.out.println(Game.hasSaveFiles());
+        // player = new Player("Sed");
+        // Game.save(player.state());
         // STARTING SCREEN
         StartingMenu();
-        // JTextArea StartingMenuScreen = new JTextArea("ghello :)");
-        // StartingMenuScreen.setBackground(Color.BLACK);
-        // add(StartingMenuScreen, BorderLayout.CENTER);
+
+        // GAME LOOP
+        // while (player) {
+            
+        // }
         setVisible(true);
         // if (player == null) {
         // StartingMenu();
@@ -62,29 +62,29 @@ public class GameGui extends JFrame {
         StartingMenuPanel.setLayout(null);
         StartingMenuPanel.setBackground(Color.BLACK);
         String labels[][] = { { "CONTINUE" }, { "NEW" }, { "QUIT" } };
-        KeyListener SMchangePanel = new KeyAdapter() {
+        ActionListener buttonAction = new ActionListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                    String entered = ((JButton) e.getComponent()).getText();
-                    if (entered.equals("CONTINUE")) {
-                        remove(StartingMenuPanel);
-                        MainGame();
-                        revalidate();
-                        repaint();
-                        System.out.println("C");
-
-                    } else if (entered.equals("NEW")) {
-                        System.out.println("N");
-
-                    } else if (entered.equals("QUIT")) {
-                        System.out.println("Q");
-
+            public void actionPerformed(ActionEvent e ) {
+                String entered = ((JButton) e.getSource()).getText();
+                if (entered.equals("CONTINUE")) {
+                    if (Game.hasSaveFiles()) {
+                        
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No Save Found");
                     }
+                    remove(StartingMenuPanel);
+                    MainGui();
+                    revalidate();
+                    repaint();
+                    System.out.println("C");
+                } else if (entered.equals("NEW")) {
+                    System.out.println("N");
+                } else if (entered.equals("QUIT")) {
+                    System.out.println("Q");
                 }
             }
         };
-        GameButton SMbuttonPanel = new GameButton(3, 1, labels, SMchangePanel);
+        GameButton SMbuttonPanel = new GameButton(3, 1, labels, buttonAction);
         SMbuttonPanel.setBounds(240, 200, 100, 100);
         JLabel SMTitle = new JLabel("javaRP{G}");
         SMTitle.setFont(new Font("Arial", Font.BOLD, 50));
@@ -103,13 +103,15 @@ public class GameGui extends JFrame {
         // }
     }
 
-    public void MainGame() {
+    public void MainGui() {
         JPanel MainScreenContainer = new JPanel();
         MainScreenContainer.setLayout(new BorderLayout());
         MainScreen = AlignedText(1);
         MainScreen.setBackground(Color.BLACK);
         MainScreen.setForeground(Color.GREEN);
         JScrollPane MainScreenScroll = new JScrollPane(MainScreen);
+        MainScreenScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        MainScreenScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         MainScreen.setText("TEST TES T  asdhgfksjhdg fjhsgd fkjhgsdkhjfgkjhsagfkhg sakjhd \n asdjfhlskjdhflkjs");
         MainScreen.setText("─────────█▄██▄█─────────\r\n" + //
                 "█▄█▄█▄█▄█▐█┼██▌█▄█▄█▄█▄█\r\n" + //
@@ -124,12 +126,18 @@ public class GameGui extends JFrame {
         TestScreen.setFont(new Font("Arial", Font.PLAIN, 20));
         MainScreenContainer.setPreferredSize(new Dimension(200, 100));
         MainScreenContainer.add(TestScreen, BorderLayout.PAGE_END);
-
         add(MainScreenContainer, BorderLayout.CENTER);
 
         JPanel RightPanel = new JPanel();
-        RightPanel.setPreferredSize(new Dimension(120, 200));
-        RightPanel.add(new JTextArea("TESTTT"), BorderLayout.LINE_START);
+        RightPanel.setLayout(new BorderLayout());
+        RightPanel.setPreferredSize(new Dimension(120, 400));
+        JTextArea playerstatsScreen = new JTextArea("STATS");
+        playerstatsScreen.setLineWrap(true);
+        playerstatsScreen.setWrapStyleWord(true);
+        JButton smth = new JButton("asdas");
+        RightPanel.add(playerstatsScreen, BorderLayout.CENTER);
+        RightPanel.add(smth, BorderLayout.PAGE_END);
+        RightPanel.setBackground(Color.BLACK);
         add(RightPanel, BorderLayout.LINE_END);
 
         JPanel BottomPanel = new JPanel();

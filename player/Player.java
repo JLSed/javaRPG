@@ -41,4 +41,28 @@ public class Player extends Stats {
     public String getName() {
         return this.name;
     }
+
+    public String state() {
+        String platerState = this.name + "/";
+        platerState += this.race + "/";
+        platerState += Integer.toString(this.lvl) + "/";
+        platerState += Integer.toString(this.exp) + "/";
+        platerState += Integer.toString(this.currentEXP) + "/";
+        platerState += Integer.toString(this.hp) + "/";
+        platerState += Integer.toString(this.currentHP) + "/";
+        platerState += Integer.toString(this.mp) + "/";
+        platerState += Integer.toString(this.currentMP) + "/";
+        platerState += Integer.toString(this.sta) + "/";
+        platerState += Integer.toString(this.currentSta) + "/";
+        platerState += Integer.toString(this.def) + "/";
+        platerState += Integer.toString(this.mdef) + "/";
+        platerState += Integer.toString(this.str) + "/";
+        platerState += Integer.toString(this.mag) + "/";
+        platerState += Integer.toString(this.agi) + "/";
+        platerState += Integer.toString(this.dex) + "/";
+        platerState += Integer.toString(this.luk) + "/";
+        platerState += Integer.toString(this.spd) + "/";
+        return platerState;
+          
+    }
 }
