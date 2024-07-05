@@ -81,4 +81,20 @@ Wrathfall
 
 
 
+Credits:
+datagoblin - monogram font
+Leo Red - Lucid Icons
+2bitcrook - Dialogue Frame Pack
+
+Random:
+Prima Nativitas
+
+Colors:
+Story Quest - #F9B294
+Monster Encounter - #F2727F
+Random Encounter - #C06C86
+Dungeon - #355C7D
+Commission - #6D5C7E
+
+
 
